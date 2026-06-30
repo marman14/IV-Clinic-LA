@@ -1,19 +1,182 @@
+@import url("https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,400;1,500;1,600&display=swap");
 @import "tailwindcss";
 
 @theme {
-  --color-brand-blue: #0066CC;
-  --color-brand-darkblue: #003D7A;
-  --color-brand-green: #00A652;
-  --color-brand-lightgray: #F8F9FA;
-  --color-brand-gray: #6C757D;
+  /* RenovationSells-inspired color system */
+  --color-rs-navy:     #121C24;
+  --color-rs-blue:     #1A3EFF;
+  --color-rs-sand:     #DED9CA;
+  --color-rs-lightsand: #F5F2EA;
+  --color-rs-peach:    #FFBC7D;
+  --color-rs-offwhite: #FAFAF8;
+  --color-rs-midgray:  #7A7A7A;
+
+  /* Legacy brand colors kept for BookingSection / form elements */
+  --color-brand-blue:      #1A3EFF;
+  --color-brand-darkblue:  #1030CC;
+  --color-brand-green:     #00A652;
 }
 
+/* -------------------------------------------------------
+   Base
+------------------------------------------------------- */
 html {
   scroll-behavior: smooth;
 }
 
 body {
-  font-family: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
-  color: #1e293b;
-  background-color: #ffffff;
+  font-family: "Manrope", ui-sans-serif, system-ui, sans-serif;
+  color: #121C24;
+  background-color: #FAFAF8;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* -------------------------------------------------------
+   Typography helpers
+------------------------------------------------------- */
+.font-display {
+  font-family: "Playfair Display", Georgia, serif;
+}
+
+/* Large editorial headlines */
+.headline-xl {
+  font-family: "Playfair Display", Georgia, serif;
+  font-size: clamp(2.75rem, 6vw, 5rem);
+  line-height: 1.05;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+}
+
+.headline-lg {
+  font-family: "Playfair Display", Georgia, serif;
+  font-size: clamp(2rem, 4.5vw, 3.75rem);
+  line-height: 1.1;
+  font-weight: 600;
+  letter-spacing: -0.015em;
+}
+
+.headline-md {
+  font-family: "Playfair Display", Georgia, serif;
+  font-size: clamp(1.5rem, 3vw, 2.5rem);
+  line-height: 1.15;
+  font-weight: 500;
+}
+
+/* Italic accent text */
+.italic-serif {
+  font-family: "Playfair Display", Georgia, serif;
+  font-style: italic;
+}
+
+/* Label/eyebrow text */
+.label-text {
+  font-family: "Manrope", sans-serif;
+  font-size: 0.625rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+/* -------------------------------------------------------
+   Section helpers
+------------------------------------------------------- */
+.section-padding {
+  padding-top: 6rem;
+  padding-bottom: 6rem;
+}
+
+@media (min-width: 1024px) {
+  .section-padding {
+    padding-top: 9rem;
+    padding-bottom: 9rem;
+  }
+}
+
+/* -------------------------------------------------------
+   Button system
+------------------------------------------------------- */
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background-color: #1A3EFF;
+  color: #fff;
+  font-family: "Manrope", sans-serif;
+  font-size: 0.8125rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 1rem 2.25rem;
+  border-radius: 9999px;
+  transition: background-color 0.2s, transform 0.15s;
+  cursor: pointer;
+}
+.btn-primary:hover {
+  background-color: #1030CC;
+  transform: translateY(-1px);
+}
+
+.btn-outline {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background-color: transparent;
+  color: #121C24;
+  font-family: "Manrope", sans-serif;
+  font-size: 0.8125rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 0.95rem 2.25rem;
+  border-radius: 9999px;
+  border: 2px solid #121C24;
+  transition: background-color 0.2s, color 0.2s, border-color 0.2s;
+  cursor: pointer;
+}
+.btn-outline:hover {
+  background-color: #121C24;
+  color: #fff;
+}
+
+.btn-outline-white {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  background-color: transparent;
+  color: #fff;
+  font-family: "Manrope", sans-serif;
+  font-size: 0.8125rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 0.95rem 2.25rem;
+  border-radius: 9999px;
+  border: 2px solid rgba(255,255,255,0.45);
+  transition: background-color 0.2s, border-color 0.2s;
+  cursor: pointer;
+}
+.btn-outline-white:hover {
+  background-color: rgba(255,255,255,0.12);
+  border-color: rgba(255,255,255,0.75);
+}
+
+/* -------------------------------------------------------
+   Divider lines (editorial style)
+------------------------------------------------------- */
+.rs-divider {
+  height: 1px;
+  background-color: rgba(18, 28, 36, 0.12);
+  width: 100%;
+}
+
+/* -------------------------------------------------------
+   Scroll-driven fade-in (simple CSS animation)
+------------------------------------------------------- */
+@keyframes slideUpFadeIn {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.animate-slide-up {
+  animation: slideUpFadeIn 0.65s ease both;
 }

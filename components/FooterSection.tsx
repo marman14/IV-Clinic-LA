@@ -1,104 +1,102 @@
-import { Droplet, Phone, Mail, MapPin, ShieldCheck, Award } from "lucide-react";
+import { Droplet, Phone, Mail, MapPin } from "lucide-react";
 
 export function FooterSection() {
   return (
-    <footer className="bg-slate-950 py-16 text-slate-400">
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        
-        {/* Top Section */}
-        <div className="grid grid-cols-1 gap-10 md:grid-cols-5 border-b border-slate-900 pb-12">
-          
-          {/* Brand Column */}
-          <div className="md:col-span-2 space-y-6">
-            <a
-              href="#"
-              className="flex items-center gap-1.5"
-              aria-label="DripGo home"
-            >
-              <span className="flex h-8 w-8 items-center justify-center rounded-lg bg-brand-blue text-white shadow-sm">
-                <Droplet className="h-5 w-5 fill-current" />
+    <footer className="bg-rs-navy text-white/50">
+      {/* Top band */}
+      <div className="border-b border-white/10 py-16">
+        <div className="mx-auto max-w-7xl px-6 lg:px-10 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
+
+          {/* Brand */}
+          <div className="space-y-5">
+            <a href="#" className="flex items-center gap-2">
+              <span className="flex h-9 w-9 items-center justify-center rounded-xl bg-rs-blue">
+                <Droplet className="h-5 w-5 fill-white text-white" />
               </span>
-              <span className="text-xl font-black tracking-tight text-white">
-                Drip<span className="text-brand-blue">Go</span>
+              <span className="font-display text-xl font-semibold text-white tracking-tight">
+                Drip<span className="text-rs-peach">Go</span>
               </span>
             </a>
-            <p className="text-xs sm:text-sm leading-relaxed max-w-sm">
-              IV therapy services are provided by licensed medical professionals following a health assessment. Rejuvenating treatments directed by <strong>Sharlot</strong>.
+            <p className="text-xs leading-relaxed max-w-xs">
+              IV therapy services provided by licensed medical professionals following a health assessment. Directed by <strong className="text-white/80">Sharlot</strong>, serving Greater Los Angeles.
             </p>
-            
-            <div className="flex items-center gap-6 text-xs pt-2">
-              <div className="flex items-center gap-1.5">
-                <ShieldCheck className="h-4.5 w-4.5 text-brand-green" />
-                <span className="font-semibold text-slate-200">Certified RNs</span>
-              </div>
-              <div className="flex items-center gap-1.5">
-                <Award className="h-4.5 w-4.5 text-brand-blue" />
-                <span className="font-semibold text-slate-200">5-Star Rated</span>
-              </div>
-            </div>
-          </div>
-
-          {/* Contact Info Column */}
-          <div className="space-y-4">
-            <h3 className="text-xs font-bold text-white uppercase tracking-wider">Contact Information</h3>
-            <div className="flex flex-col gap-3 text-xs sm:text-sm">
+            <div className="flex flex-col gap-2 text-xs">
               <div className="flex items-center gap-2">
-                <Phone className="h-4 w-4 text-brand-blue shrink-0" />
+                <Phone className="h-3.5 w-3.5 text-rs-peach shrink-0" />
                 <a href="tel:3105550199" className="hover:text-white transition-colors">(310) 555-0199</a>
               </div>
               <div className="flex items-center gap-2">
-                <Mail className="h-4 w-4 text-brand-blue shrink-0" />
-                <a href="mailto:support@yourcompany.com" className="hover:text-white transition-colors">support@yourcompany.com</a>
+                <Mail className="h-3.5 w-3.5 text-rs-peach shrink-0" />
+                <a href="mailto:info@dripgo.la" className="hover:text-white transition-colors">info@dripgo.la</a>
               </div>
               <div className="flex items-center gap-2">
-                <MapPin className="h-4 w-4 text-brand-blue shrink-0" />
-                <span className="leading-tight">Greater Los Angeles, CA</span>
+                <MapPin className="h-3.5 w-3.5 text-rs-peach shrink-0" />
+                <span>Greater Los Angeles, CA</span>
               </div>
             </div>
-            <div className="text-[11px] leading-tight space-y-1">
-              <p className="font-bold text-slate-300">Operating Hours</p>
-              <p>Monday - Sunday: 8:00 AM - 10:00 PM</p>
+          </div>
+
+          {/* Quick Links */}
+          <div className="space-y-4">
+            <h3 className="label-text text-white tracking-widest">Quick Links</h3>
+            <ul className="space-y-2.5 text-xs">
+              {["Home", "Treatments", "How It Works", "About Sharlot", "Service Areas", "Book Now"].map((link) => (
+                <li key={link}>
+                  <a href="#" className="hover:text-white transition-colors">{link}</a>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {/* Services */}
+          <div className="space-y-4">
+            <h3 className="label-text text-white tracking-widest">IV Treatments</h3>
+            <ul className="space-y-2.5 text-xs">
+              {[
+                "Immunity Boost IV", "Enhanced Electrolytes", "High Dose Vitamin C",
+                "NAD+ Regeneration", "Beauty Glow Drip", "Hangover Recovery",
+              ].map((s) => (
+                <li key={s}>
+                  <a href="#services-list" className="hover:text-white transition-colors">{s}</a>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          {/* Hours + Legal */}
+          <div className="space-y-6">
+            <div className="space-y-4">
+              <h3 className="label-text text-white tracking-widest">Hours</h3>
+              <p className="text-xs leading-relaxed">
+                Monday – Sunday<br />
+                <span className="text-white/80 font-semibold">8:00 AM – 10:00 PM</span>
+              </p>
+            </div>
+            <div className="space-y-4">
+              <h3 className="label-text text-white tracking-widest">Legal</h3>
+              <ul className="space-y-2.5 text-xs">
+                {["Privacy Policy", "Terms & Conditions", "Cookie Settings"].map((l) => (
+                  <li key={l}>
+                    <a href="#" className="hover:text-white transition-colors">{l}</a>
+                  </li>
+                ))}
+              </ul>
             </div>
           </div>
 
-          {/* Quick Links Column */}
-          <div className="space-y-4">
-            <h3 className="text-xs font-bold text-white uppercase tracking-wider">Quick Links</h3>
-            <ul className="space-y-2.5 text-xs sm:text-sm">
-              <li><a href="#" className="hover:text-white transition-colors">Home</a></li>
-              <li><a href="#services-list" className="hover:text-white transition-colors">Pricing</a></li>
-              <li><a href="#faq" className="hover:text-white transition-colors">Support</a></li>
-              <li><a href="#how-it-works" className="hover:text-white transition-colors">Blog</a></li>
-            </ul>
-          </div>
-
-          {/* Legal Column */}
-          <div className="space-y-4">
-            <h3 className="text-xs font-bold text-white uppercase tracking-wider">Legal</h3>
-            <ul className="space-y-2.5 text-xs sm:text-sm">
-              <li><a href="#" className="hover:text-white transition-colors">Privacy Policy</a></li>
-              <li><a href="#" className="hover:text-white transition-colors">Cookies</a></li>
-              <li><a href="#" className="hover:text-white transition-colors">Terms</a></li>
-              <li><a href="#" className="hover:text-white transition-colors">Features</a></li>
-            </ul>
-          </div>
-
         </div>
+      </div>
 
-        {/* Bottom Section */}
-        <div className="mt-12 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs">
-          <p className="text-slate-500 text-center sm:text-left leading-relaxed">
-            &copy; {new Date().getFullYear()} Zymco. All rights reserved. Directed by Sharlot. IV therapy services in LA.
-          </p>
-          <div className="flex gap-4 text-slate-500">
+      {/* Bottom bar */}
+      <div className="py-6">
+        <div className="mx-auto max-w-7xl px-6 lg:px-10 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs">
+          <p>&copy; {new Date().getFullYear()} DripGo IV Clinic LA. Directed by Sharlot. All rights reserved.</p>
+          <div className="flex gap-6">
             <a href="#" className="hover:text-white transition-colors">Privacy Policy</a>
-            <span>|</span>
-            <a href="#" className="hover:text-white transition-colors">Terms & Policies</a>
-            <span>|</span>
-            <a href="#" className="hover:text-white transition-colors">Cookies Settings</a>
+            <a href="#" className="hover:text-white transition-colors">Terms</a>
+            <a href="#" className="hover:text-white transition-colors">Cookies</a>
           </div>
         </div>
-
       </div>
     </footer>
   );

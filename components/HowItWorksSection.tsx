@@ -1,102 +1,79 @@
 "use client";
-
 import Image from "next/image";
-import { Laptop, Activity, Shield, MapPin, ArrowUpRight } from "lucide-react";
+import { ArrowUpRight } from "lucide-react";
 
 const steps = [
-  {
-    title: "Book Online",
-    description: "Choose your IV treatment & time.",
-    icon: Laptop,
-  },
-  {
-    title: "Relax & Recover",
-    description: "Quick 30-60 minute treatment.",
-    icon: Activity,
-  },
-  {
-    title: "Medical Review",
-    description: "Licensed professional reviews your intake.",
-    icon: Shield,
-  },
-  {
-    title: "We Come to You",
-    description: "Nurse arrives at your location.",
-    icon: MapPin,
-  },
+  { num: "01", title: "Book Online", desc: "Choose your IV treatment & time. Our booking process takes under 2 minutes." },
+  { num: "02", title: "Medical Review", desc: "A licensed professional reviews your health intake before dispatch." },
+  { num: "03", title: "We Come to You", desc: "Your certified nurse arrives at your home, hotel, or office." },
+  { num: "04", title: "Relax & Recover", desc: "Sit back as your 30–60 minute infusion does its work." },
 ];
 
 export function HowItWorksSection() {
-  const scrollToBooking = () => {
-    const el = document.getElementById("booking");
-    if (el) el.scrollIntoView({ behavior: "smooth" });
-  };
-
   return (
-    <section id="how-it-works" className="bg-slate-50/50 py-16 sm:py-24 border-t border-slate-100">
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        
+    <section id="how-it-works" className="bg-rs-lightsand section-padding">
+      <div className="mx-auto max-w-7xl px-6 lg:px-10">
+
         {/* Header */}
-        <div className="mb-16 text-center max-w-3xl mx-auto space-y-4">
-          <h2 className="text-3xl font-extrabold tracking-tight text-slate-900 sm:text-4xl">
-            How It Works
+        <div className="mb-16 space-y-4">
+          <span className="label-text text-rs-blue tracking-widest">Process</span>
+          <h2 className="headline-lg text-rs-navy">
+            How It <span className="italic-serif text-rs-midgray">Works</span>
           </h2>
-          <p className="text-base sm:text-lg text-slate-500 leading-relaxed">
-            Our trained nurse administers your IV therapy at home, office, or any location you prefer.
+          <p className="text-rs-midgray text-base leading-relaxed max-w-lg">
+            Our trained nurse administers your IV therapy at home, office, or any location you prefer across Los Angeles.
           </p>
         </div>
 
-        {/* Split Screen Grid */}
-        <div className="grid grid-cols-1 items-center gap-12 lg:grid-cols-12">
-          
-          {/* Left Column: Custom Image */}
-          <div className="relative mx-auto max-w-md lg:col-span-5 lg:mx-0 lg:max-w-none w-full">
-            <div className="relative overflow-hidden rounded-3xl bg-white p-2 shadow-lg ring-1 ring-slate-200 aspect-[4/3] sm:aspect-square">
-              <div className="relative h-full w-full overflow-hidden rounded-2xl bg-slate-100">
-                <Image
-                  src="/images/how_it_works_dripgo.png"
-                  alt="Setting up IV Drip bag - DripGo"
-                  fill
-                  className="object-cover"
-                  sizes="(max-width: 768px) 100vw, 33vw"
-                />
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
+
+          {/* Left — Steps */}
+          <div className="lg:col-span-7 space-y-0">
+            {steps.map((step, i) => (
+              <div key={step.num}>
+                <div className="flex items-start gap-6 py-7">
+                  <span className="label-text text-rs-navy/25 w-8 shrink-0 mt-1">{step.num}</span>
+                  <div className="flex-1">
+                    <h3 className="font-display text-xl sm:text-2xl font-medium text-rs-navy mb-2">
+                      {step.title}
+                    </h3>
+                    <p className="text-sm text-rs-midgray leading-relaxed">{step.desc}</p>
+                  </div>
+                  <ArrowUpRight className="h-5 w-5 text-rs-navy/20 shrink-0 mt-1" />
+                </div>
+                {i < steps.length - 1 && <div className="h-px bg-rs-navy/10" />}
               </div>
+            ))}
+
+            <div className="pt-8">
+              <button
+                onClick={() => document.getElementById("booking")?.scrollIntoView({ behavior: "smooth" })}
+                className="btn-primary"
+              >
+                Book Your Session
+              </button>
             </div>
           </div>
 
-          {/* Right Column: 2x2 Grid */}
-          <div className="lg:col-span-7 grid grid-cols-1 sm:grid-cols-2 gap-6 w-full">
-            {steps.map((step) => {
-              const Icon = step.icon;
-              return (
-                <div
-                  key={step.title}
-                  onClick={scrollToBooking}
-                  className="group relative flex flex-col rounded-3xl border border-slate-200/80 bg-white p-6 shadow-sm hover:shadow-md transition-all duration-300 hover:-translate-y-0.5 cursor-pointer justify-between min-h-[160px]"
-                >
-                  <div className="flex items-center justify-between mb-4">
-                    <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-brand-blue/10 text-brand-blue">
-                      <Icon className="h-5 w-5" />
-                    </div>
-                    <span className="text-slate-400 group-hover:text-brand-blue transition-colors">
-                      <ArrowUpRight className="h-5 w-5" />
-                    </span>
-                  </div>
-                  <div className="space-y-1">
-                    <h3 className="text-base font-bold text-slate-900">
-                      {step.title}
-                    </h3>
-                    <p className="text-xs text-slate-500 leading-relaxed">
-                      {step.description}
-                    </p>
-                  </div>
-                </div>
-              );
-            })}
+          {/* Right — Nano banana image */}
+          <div className="lg:col-span-5 relative">
+            <div className="relative overflow-hidden rounded-2xl aspect-[3/4] w-full shadow-xl">
+              <Image
+                src="/images/how_it_works_nano_banana.png"
+                alt="Nurse preparing IV drip in a tropical wellness room"
+                fill
+                className="object-cover object-center"
+                sizes="(max-width: 1024px) 100vw, 42vw"
+              />
+            </div>
+            {/* Floating stat card */}
+            <div className="absolute -bottom-6 -left-6 bg-rs-navy rounded-2xl px-7 py-5 shadow-xl hidden sm:block">
+              <p className="font-display text-3xl font-semibold text-white">30+</p>
+              <p className="label-text text-rs-peach mt-1 tracking-widest">IV Formulas</p>
+            </div>
           </div>
 
         </div>
-
       </div>
     </section>
   );

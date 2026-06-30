@@ -1,208 +1,156 @@
 "use client";
-
-import { useState } from "react";
 import Image from "next/image";
+import { useState } from "react";
 import { ArrowRight, Star } from "lucide-react";
 
-interface DripPackage {
-  id: string;
-  name: string;
-  tagline: string;
-  price: number;
-  popular: boolean;
-  image: string; // Real image path
-  glowColor: string; // CSS shadow class
-  label: string; // Category badge
-  ingredients: string;
-}
-
-const dripPackages: DripPackage[] = [
+const drips = [
   {
     id: "immune-boost",
+    label: "STRONG IMMUNE DEFENSE",
     name: "Strong Immune Defense",
-    tagline: "High-Dose Immunity Shield",
+    desc: "High-Dose Vitamin C | Zinc | Glutathione | B-Complex",
     price: 154,
     popular: true,
     image: "/images/drip_immune.png",
-    glowColor: "shadow-emerald-500/10 border-emerald-100",
-    label: "STRONG IMMUNE DEFENSE",
-    ingredients: "High-Dose Vitamin C | Zinc | Glutathione | B-Complex Vitamins",
   },
   {
     id: "hydration",
+    label: "HYDRATION & ELECTROLYTES",
     name: "Enhanced Electrolytes",
-    tagline: "Rehydrate & Revitalize",
+    desc: "IV Saline | Sodium | Potassium | Calcium | Magnesium",
     price: 136,
     popular: false,
     image: "/images/drip_hydration.png",
-    glowColor: "shadow-sky-500/10 border-sky-100",
-    label: "STRONG IMMUNE DEFENSE",
-    ingredients: "IV Saline Fluid | Sodium | Potassium | Calcium | Magnesium",
   },
   {
     id: "myers-cocktail",
+    label: "VITAMIN C MEGA DOSE",
     name: "High Dose Vitamin C",
-    tagline: "Classical Myers' Booster",
+    desc: "High-Dose Vitamin C | Vitamin B12 | B-Complex | Magnesium",
     price: 154,
     popular: false,
     image: "/images/drip_immune.png",
-    glowColor: "shadow-orange-500/10 border-orange-100",
-    label: "STRONG IMMUNE DEFENSE",
-    ingredients: "High-Dose Vitamin C | Vitamin B12 | B-Complex Vitamins | Magnesium",
   },
   {
     id: "nad-plus",
+    label: "CELLULAR REJUVENATION",
     name: "NAD+ Cell Regeneration",
-    tagline: "Anti-Aging & Brain Health",
+    desc: "500mg NAD+ Coenzyme | Premium IV Saline",
     price: 499,
     popular: true,
     image: "/images/drip_energy.png",
-    glowColor: "shadow-purple-500/10 border-purple-100",
-    label: "CELLULAR REJUVENATION",
-    ingredients: "500mg NAD+ Coenzyme | Premium IV Saline",
   },
   {
     id: "beauty",
+    label: "COLLAGEN & RADIANCE",
     name: "Beauty Glow Drip",
-    tagline: "Collagen & Radiance Push",
+    desc: "Biotin | High-Dose Glutathione | Vitamin C | B-Complex",
     price: 229,
     popular: false,
     image: "/images/drip_energy.png",
-    glowColor: "shadow-rose-500/10 border-rose-100",
-    label: "COLLAGEN & RADIANCE",
-    ingredients: "Biotin | High-Dose Glutathione | Vitamin C | B-Complex",
   },
   {
     id: "hangover",
+    label: "RAPID RECOVERY",
     name: "Hangover Recovery Drip",
-    tagline: "Direct Nausea & Headache Relief",
+    desc: "Anti-Nausea | Anti-Inflammatory | Vitamin C | B12 | Electrolytes",
     price: 249,
     popular: false,
     image: "/images/drip_hydration.png",
-    glowColor: "shadow-indigo-500/10 border-indigo-100",
-    label: "RAPID RECOVERY",
-    ingredients: "Anti-Nausea | Anti-Inflammatory | Vitamin C | B12 | Electrolytes",
   },
 ];
 
 export function DripMenuSection() {
-  const [activeFilter, setActiveFilter] = useState<"all" | "high" | "low">("all");
+  const [filter, setFilter] = useState<"all" | "high" | "low">("all");
 
-  const selectPackage = (id: string) => {
-    const el = document.getElementById("booking");
-    if (el) {
-      el.scrollIntoView({ behavior: "smooth" });
-    }
-    window.dispatchEvent(new CustomEvent("drip-selected", { detail: id }));
-  };
-
-  const filteredPackages = dripPackages.filter((pkg) => {
-    if (activeFilter === "high") return pkg.price >= 200;
-    if (activeFilter === "low") return pkg.price < 200;
+  const filtered = drips.filter((d) => {
+    if (filter === "high") return d.price >= 200;
+    if (filter === "low") return d.price < 200;
     return true;
   });
 
-  return (
-    <section id="services-list" className="bg-white py-16 sm:py-24 border-t border-slate-100">
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        
-        {/* Header */}
-        <div className="mb-12 text-center max-w-3xl mx-auto space-y-4">
-          <h2 className="text-3xl font-extrabold tracking-tight text-slate-900 sm:text-4xl">
-            Mobile IV Therapy Treatments
-          </h2>
-          <p className="text-base sm:text-lg text-slate-500 leading-relaxed">
-            30+ IV drips, including custom IV hydration treatments that let you pick the nutrients.
-          </p>
-        </div>
+  const select = (id: string) => {
+    document.getElementById("booking")?.scrollIntoView({ behavior: "smooth" });
+    window.dispatchEvent(new CustomEvent("drip-selected", { detail: id }));
+  };
 
-        {/* Tab Filters */}
-        <div className="mb-16 flex justify-center border-b border-slate-100">
-          <div className="flex gap-8">
-            <button
-              onClick={() => setActiveFilter("all")}
-              className={`pb-4 text-sm font-bold transition-all border-b-2 cursor-pointer ${
-                activeFilter === "all" ? "border-brand-blue text-brand-blue" : "border-transparent text-slate-500 hover:text-slate-950"
-              }`}
-            >
-              Show All IVs
-            </button>
-            <button
-              onClick={() => setActiveFilter("high")}
-              className={`pb-4 text-sm font-bold transition-all border-b-2 cursor-pointer ${
-                activeFilter === "high" ? "border-brand-blue text-brand-blue" : "border-transparent text-slate-500 hover:text-slate-950"
-              }`}
-            >
-              Higher-Priced IVs
-            </button>
-            <button
-              onClick={() => setActiveFilter("low")}
-              className={`pb-4 text-sm font-bold transition-all border-b-2 cursor-pointer ${
-                activeFilter === "low" ? "border-brand-blue text-brand-blue" : "border-transparent text-slate-500 hover:text-slate-950"
-              }`}
-            >
-              Lower-Priced IVs
-            </button>
+  return (
+    <section id="services-list" className="bg-rs-offwhite section-padding">
+      <div className="mx-auto max-w-7xl px-6 lg:px-10">
+
+        {/* Header */}
+        <div className="mb-14 flex flex-col lg:flex-row lg:items-end lg:justify-between gap-8">
+          <div className="space-y-4 max-w-xl">
+            <span className="label-text text-rs-blue tracking-widest">Treatments</span>
+            <h2 className="headline-lg text-rs-navy">
+              Mobile IV Therapy<br />
+              <span className="italic-serif text-rs-midgray">Treatments</span>
+            </h2>
+            <p className="text-rs-midgray text-sm leading-relaxed max-w-sm">
+              30+ IV drips, including custom hydration treatments tailored to your specific needs.
+            </p>
+          </div>
+
+          {/* Filter tabs */}
+          <div className="flex gap-1 bg-rs-sand/40 rounded-full p-1 self-start">
+            {(["all", "high", "low"] as const).map((f) => (
+              <button
+                key={f}
+                onClick={() => setFilter(f)}
+                className={`px-5 py-2 rounded-full text-xs font-bold uppercase tracking-widest transition-all cursor-pointer ${
+                  filter === f
+                    ? "bg-rs-navy text-white shadow-sm"
+                    : "text-rs-midgray hover:text-rs-navy"
+                }`}
+              >
+                {f === "all" ? "All IVs" : f === "high" ? "Premium" : "Standard"}
+              </button>
+            ))}
           </div>
         </div>
 
-        {/* Bag Grid */}
-        <div className="grid grid-cols-1 gap-12 sm:grid-cols-2 lg:grid-cols-3">
-          {filteredPackages.map((pkg) => (
+        {/* Grid */}
+        <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3">
+          {filtered.map((drip) => (
             <div
-              key={pkg.id}
-              className={`group flex flex-col items-center rounded-3xl border border-slate-200/80 bg-white p-6 shadow-sm hover:shadow-lg transition-all duration-300 relative ${pkg.glowColor}`}
+              key={drip.id}
+              className="group relative flex flex-col bg-white rounded-2xl overflow-hidden border border-rs-sand/60 hover:border-rs-navy/20 hover:shadow-lg transition-all duration-300"
             >
-              {pkg.popular && (
-                <div className="absolute -top-3.5 left-1/2 -translate-x-1/2">
-                  <span className="inline-flex items-center gap-1 rounded-full bg-brand-blue px-3 py-1 text-[10px] font-black text-white uppercase shadow-sm">
-                    <Star className="h-3 w-3 fill-current" />
-                    Popular
+              {drip.popular && (
+                <div className="absolute top-4 left-4 z-10">
+                  <span className="inline-flex items-center gap-1 rounded-full bg-rs-blue px-3 py-1 text-[10px] font-black text-white uppercase tracking-wider">
+                    <Star className="h-3 w-3 fill-current" /> Popular
                   </span>
                 </div>
               )}
 
-              {/* Real fruit-infused IV bag image */}
-              <div className="relative w-full aspect-[4/5] max-w-[200px] mb-6 overflow-hidden rounded-2xl bg-slate-50 group-hover:scale-[1.03] transition-transform duration-500 shadow-inner">
+              {/* Image */}
+              <div className="relative w-full aspect-[4/3] bg-rs-lightsand overflow-hidden">
                 <Image
-                  src={pkg.image}
-                  alt={pkg.name}
+                  src={drip.image}
+                  alt={drip.name}
                   fill
-                  className="object-cover"
-                  sizes="(max-width: 768px) 100vw, 33vw"
+                  className="object-cover group-hover:scale-105 transition-transform duration-500"
+                  sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
                 />
               </div>
 
-              {/* Drip Information details */}
-              <div className="w-full text-center space-y-3">
-                <span className="text-[10px] font-extrabold tracking-widest text-brand-blue uppercase bg-brand-blue/5 px-3 py-1 rounded-full">
-                  {pkg.label}
-                </span>
-                
-                <div className="space-y-1">
-                  <h3 className="text-xl font-bold text-slate-900 leading-tight">
-                    {pkg.name}
-                  </h3>
-                  <p className="text-xs text-slate-500 font-medium">
-                    {pkg.ingredients}
-                  </p>
-                </div>
+              {/* Info */}
+              <div className="flex flex-col flex-1 p-6 gap-3">
+                <span className="label-text text-rs-blue tracking-widest">{drip.label}</span>
+                <h3 className="font-display text-xl font-medium text-rs-navy leading-tight">{drip.name}</h3>
+                <p className="text-xs text-rs-midgray leading-relaxed flex-1">{drip.desc}</p>
 
-                <div className="pt-4 border-t border-slate-100 flex items-center justify-between">
-                  <span className="text-2xl font-black text-slate-950">
-                    ${pkg.price}
-                  </span>
-                  
+                <div className="flex items-center justify-between pt-4 border-t border-rs-sand/50 mt-2">
+                  <span className="font-display text-2xl font-semibold text-rs-navy">${drip.price}</span>
                   <button
-                    onClick={() => selectPackage(pkg.id)}
-                    className="inline-flex items-center gap-1.5 rounded-full bg-slate-100 hover:bg-brand-blue hover:text-white px-5 py-3 text-xs font-bold text-slate-700 transition-colors shadow-sm cursor-pointer"
+                    onClick={() => select(drip.id)}
+                    className="inline-flex items-center gap-1 rounded-full bg-rs-navy hover:bg-rs-blue text-white px-5 py-2.5 text-xs font-bold uppercase tracking-wider transition-colors cursor-pointer"
                   >
-                    Book Now
-                    <ArrowRight className="h-4 w-4" />
+                    Book Now <ArrowRight className="h-3.5 w-3.5" />
                   </button>
                 </div>
               </div>
-
             </div>
           ))}
         </div>

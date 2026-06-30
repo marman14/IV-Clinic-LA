@@ -1,112 +1,105 @@
 "use client";
-
-import { Zap, Sun, Shield, Award, ArrowRight } from "lucide-react";
+import { Zap, Droplets, Shield, Award, ArrowRight } from "lucide-react";
 
 const services = [
   {
     id: "energy-boost",
+    num: "01",
     name: "Energy & Focus IV",
-    description: "Fight fatigue & brain fog. Supports alertness & sustained energy throughout the day.",
+    desc: "Fight fatigue & brain fog. Supports alertness & sustained energy throughout the day.",
     icon: Zap,
-    iconColor: "text-amber-500 bg-amber-50 border-amber-100",
   },
   {
     id: "hydration",
+    num: "02",
     name: "Hydration Therapy",
-    description: "Perfect for dehydration from travel, heat, or intense activity. Replenish electrolytes fast.",
-    icon: Sun,
-    iconColor: "text-blue-500 bg-blue-50 border-blue-100",
+    desc: "Perfect for dehydration from travel, heat, or intense activity. Replenish electrolytes fast.",
+    icon: Droplets,
   },
   {
     id: "immune-boost",
+    num: "03",
     name: "Immunity Boost IV",
-    description: "Vitamin C, Zinc & antioxidants. Strengthen your body's defenses & reduce the risk.",
+    desc: "Vitamin C, Zinc & antioxidants. Strengthen your body's defenses & reduce your risk of illness.",
     icon: Shield,
-    iconColor: "text-emerald-500 bg-emerald-50 border-emerald-100",
   },
   {
     id: "athletic-recovery",
+    num: "04",
     name: "Athletic Recovery",
-    description: "Speeds up recovery after workouts and helps maintain peak performance.",
+    desc: "Speeds up recovery after workouts and helps maintain peak performance levels.",
     icon: Award,
-    iconColor: "text-indigo-500 bg-indigo-50 border-indigo-100",
   },
 ];
 
 export function ServicesGrid() {
-  const scrollTo = (id: string) => {
-    const el = document.getElementById(id);
-    if (el) el.scrollIntoView({ behavior: "smooth" });
-  };
-
-  const handleServiceSelect = (id: string) => {
-    scrollTo("booking");
+  const handleSelect = (id: string) => {
+    document.getElementById("booking")?.scrollIntoView({ behavior: "smooth" });
     window.dispatchEvent(new CustomEvent("drip-selected", { detail: id }));
   };
 
   return (
-    <section id="services" className="bg-white py-16 sm:py-24 border-t border-slate-100">
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        
-        {/* Section Header */}
-        <div className="mb-16 text-center max-w-3xl mx-auto space-y-4">
-          <h2 className="text-3xl font-extrabold tracking-tight text-slate-900 sm:text-4xl">
-            Common IV Therapy Services
-          </h2>
-          <p className="text-base sm:text-lg text-slate-500 leading-relaxed">
-            Our professional IV treatments help you feel energized & fully recovered—anytime, anywhere.
+    <section id="services" className="bg-rs-navy section-padding">
+      <div className="mx-auto max-w-7xl px-6 lg:px-10">
+
+        {/* Header */}
+        <div className="mb-16 flex flex-col lg:flex-row lg:items-end lg:justify-between gap-6">
+          <div className="space-y-4 max-w-xl">
+            <span className="label-text text-rs-peach tracking-widest">Our Treatments</span>
+            <h2 className="headline-lg text-white">
+              Common IV Therapy<br />
+              <span className="italic-serif text-rs-sand">Services</span>
+            </h2>
+          </div>
+          <p className="text-white/60 text-sm leading-relaxed max-w-xs lg:max-w-xs lg:text-right">
+            Professional IV treatments that help you feel energized &amp; fully recovered—anytime, anywhere in Los Angeles.
           </p>
         </div>
 
-        {/* Services Grid */}
-        <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
-          {services.map((service) => {
-            const Icon = service.icon;
-            return (
-              <div
-                key={service.id}
-                onClick={() => handleServiceSelect(service.id)}
-                className="group relative flex flex-col rounded-3xl border border-slate-200/80 bg-white p-6 shadow-sm hover:shadow-md transition-all duration-300 hover:-translate-y-1 cursor-pointer"
+        {/* Divider */}
+        <div className="h-px bg-white/10 mb-0" />
+
+        {/* Service list */}
+        {services.map((s, i) => {
+          const Icon = s.icon;
+          return (
+            <div key={s.id}>
+              <button
+                onClick={() => handleSelect(s.id)}
+                className="group w-full flex items-center justify-between gap-6 py-8 text-left cursor-pointer"
               >
-                <div className="flex items-center justify-between mb-4">
-                  <div className={`flex h-12 w-12 items-center justify-center rounded-2xl border ${service.iconColor}`}>
-                    <Icon className="h-6 w-6" />
+                <div className="flex items-center gap-6 flex-1">
+                  <span className="label-text text-white/25 w-8 shrink-0">{s.num}</span>
+                  <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-white/5 text-rs-peach group-hover:bg-rs-peach group-hover:text-rs-navy transition-colors">
+                    <Icon className="h-5 w-5" />
                   </div>
-                  <span className="rounded-full bg-slate-50 p-2 text-slate-400 group-hover:bg-brand-blue group-hover:text-white transition-colors duration-300">
-                    <ArrowRight className="h-4.5 w-4.5" />
-                  </span>
+                  <div>
+                    <h3 className="font-display text-xl sm:text-2xl font-medium text-white group-hover:text-rs-peach transition-colors">
+                      {s.name}
+                    </h3>
+                    <p className="mt-1 text-sm text-white/50 leading-relaxed max-w-md hidden sm:block">
+                      {s.desc}
+                    </p>
+                  </div>
                 </div>
-                <h3 className="text-lg font-bold text-slate-900 mb-2">
-                  {service.name}
-                </h3>
-                <p className="text-sm leading-relaxed text-slate-500">
-                  {service.description}
-                </p>
-              </div>
-            );
-          })}
-
-          {/* Special Wide CTA Card */}
-          <div
-            onClick={() => scrollTo("services-list")}
-            className="group relative flex flex-col md:col-span-2 lg:col-span-2 rounded-3xl border border-slate-200/80 bg-slate-50 p-6 shadow-sm hover:shadow-md transition-all duration-300 hover:-translate-y-1 cursor-pointer justify-center"
-          >
-            <div className="flex flex-col sm:flex-row items-center justify-between gap-6">
-              <div className="space-y-2 text-center sm:text-left">
-                <h3 className="text-lg font-extrabold text-slate-900">
-                  Customize your IV therapy
-                </h3>
-                <p className="text-sm text-slate-500 leading-relaxed max-w-md">
-                  Upgrade and customize any IV therapy effortlessly with Sharlot. Decide and tailor your treatment with your IV nurse at your appointment.
-                </p>
-              </div>
-              <button className="flex items-center gap-1.5 rounded-full bg-slate-100 hover:bg-brand-blue hover:text-white border border-slate-200/50 px-6 py-3 text-xs font-extrabold text-slate-700 transition-colors shadow-sm cursor-pointer whitespace-nowrap">
-                View Treatments
-                <ArrowRight className="h-4 w-4" />
+                <ArrowRight className="h-5 w-5 shrink-0 text-white/25 group-hover:text-rs-peach group-hover:translate-x-1 transition-all" />
               </button>
+              {i < services.length - 1 && <div className="h-px bg-white/10" />}
             </div>
-          </div>
+          );
+        })}
 
+        {/* CTA row */}
+        <div className="mt-12 flex flex-col sm:flex-row items-center justify-between gap-6 pt-10 border-t border-white/10">
+          <p className="font-display text-lg italic-serif text-rs-sand text-center sm:text-left">
+            Upgrade and customize any IV with Sharlot.
+          </p>
+          <button
+            onClick={() => document.getElementById("services-list")?.scrollIntoView({ behavior: "smooth" })}
+            className="btn-outline-white"
+          >
+            View All Treatments
+          </button>
         </div>
 
       </div>

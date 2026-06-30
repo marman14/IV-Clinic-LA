@@ -11,73 +11,68 @@ import { AdditionalServicesSection } from "@/components/AdditionalServicesSectio
 import { BookingSection } from "@/components/BookingSection";
 import { FAQSection } from "@/components/FAQSection";
 import { FooterSection } from "@/components/FooterSection";
+import { ArrowRight } from "lucide-react";
 
 export default function Home() {
-  const scrollToBooking = () => {
-    const el = document.getElementById("booking");
-    if (el) el.scrollIntoView({ behavior: "smooth" });
-  };
-
   return (
-    <div className="min-h-screen bg-white">
+    <div className="min-h-screen bg-rs-offwhite">
       <Navigation />
-      
+
       <main>
-        {/* 1. Hero banner with Rating & Search Bar */}
+        {/* 1. Full-screen cinematic hero */}
         <HeroSection />
 
-        {/* 2. Common IV Therapy Services */}
+        {/* 2. Common services — dark navy editorial list */}
         <ServicesGrid />
 
-        {/* 3. How It Works (Pink Glove Image & 2x2 Grid) */}
+        {/* 3. How It Works — light sand split layout */}
         <HowItWorksSection />
 
-        {/* 4. Mobile IV Therapy Treatments (IV Bags & Price Filters) */}
+        {/* 4. Drip Treatments — filtered card grid */}
         <DripMenuSection />
 
-        {/* 5. Meet Sharlot (About Us & Director Story) */}
+        {/* 5. Meet Sharlot — dark navy with portrait & italic quote */}
         <OwnerSection />
 
-        {/* 6. Service Areas (ZIP Code check database) */}
+        {/* 6. Service Areas — sand bg + navy ZIP card */}
         <ServiceAreasSection />
 
-        {/* 7. Additional Wellness Injections */}
+        {/* 7. Additional Boosters */}
         <AdditionalServicesSection />
 
-        {/* 8. Booking Dispatch Form Wizard */}
+        {/* 8. Booking Wizard */}
         <BookingSection />
 
-        {/* 9. Begin Your Path to Wellness (CTA) */}
-        <section className="bg-brand-blue py-16 text-center text-white relative overflow-hidden">
-          {/* Subtle background circles */}
-          <div className="absolute top-0 left-0 -translate-x-1/2 -translate-y-1/2 w-96 h-96 rounded-full bg-white/5" />
-          <div className="absolute bottom-0 right-0 translate-x-1/2 translate-y-1/2 w-96 h-96 rounded-full bg-white/5" />
-          
-          <div className="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8 space-y-6 relative z-10">
-            <h2 className="text-3xl font-extrabold tracking-tight sm:text-4xl">
-              Begin Your Path to Wellness
+        {/* 9. Begin Your Path CTA — RS-style electric blue band */}
+        <section className="relative bg-rs-blue overflow-hidden py-24 text-center">
+          <div className="absolute inset-0 opacity-10 bg-[radial-gradient(circle_at_30%_50%,white,transparent_60%)]" />
+          <div className="relative z-10 mx-auto max-w-3xl px-6 space-y-6">
+            <span className="label-text text-white/70 tracking-widest">Start Today</span>
+            <h2 className="headline-lg text-white">
+              Begin Your Path<br />
+              <span className="italic-serif">to Wellness</span>
             </h2>
-            <p className="text-base sm:text-lg text-white/80 max-w-xl mx-auto leading-relaxed">
-              Connect with certified doctors and start your wellness journey today in few steps.
+            <p className="text-white/70 text-base leading-relaxed max-w-xl mx-auto">
+              Connect with Sharlot&apos;s certified nursing team and start your wellness journey today in a few easy steps.
             </p>
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-4">
               <button
-                onClick={scrollToBooking}
-                className="w-full sm:w-auto rounded-full bg-white hover:bg-slate-50 text-brand-blue px-8 py-3.5 text-sm font-bold shadow-md transition-colors cursor-pointer"
+                onClick={() => document.getElementById("booking")?.scrollIntoView({ behavior: "smooth" })}
+                className="btn-outline-white flex items-center gap-2"
               >
-                Get Started
+                Get Started <ArrowRight className="h-4 w-4" />
               </button>
               <button
-                onClick={scrollToBooking}
-                className="w-full sm:w-auto rounded-full border border-white/30 hover:bg-white/10 text-white px-8 py-3.5 text-sm font-bold transition-colors cursor-pointer"
+                onClick={() => document.getElementById("services-list")?.scrollIntoView({ behavior: "smooth" })}
+                className="label-text text-white/70 hover:text-white tracking-widest transition-colors cursor-pointer"
               >
-                Book Treatments
+                View All Treatments →
               </button>
             </div>
           </div>
         </section>
 
-        {/* 10. Frequently Asked Questions (Consultation Image & native details) */}
+        {/* 10. FAQ */}
         <FAQSection />
       </main>
 
